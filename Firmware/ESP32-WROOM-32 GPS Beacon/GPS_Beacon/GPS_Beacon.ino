@@ -105,10 +105,10 @@ void loop() {                              // run over and over again
             // If location recieved
             if (GPS.fix) {
               client.print("<br>Location: ");
-              client.print(GPS.latitudeDegrees, 4);
+              client.print(GPS.latitudeDegrees, 9);
               client.print(GPS.lat);
               client.print(", ");
-              client.print(GPS.longitudeDegrees, 4);
+              client.print(GPS.longitudeDegrees, 9);
               client.println(GPS.lon);
               client.print("<br>Speed (knots): ");
               client.println(GPS.speed);
@@ -188,10 +188,10 @@ void loop() {                              // run over and over again
       Serial.println(GPS.year, DEC);
       if (GPS.fix) {
         Serial.print("Location: ");
-        Serial.print(GPS.latitudeDegrees, 4);
+        Serial.print(GPS.latitudeDegrees, 9);
         Serial.print(GPS.lat);
         Serial.print(", ");
-        Serial.print(GPS.longitudeDegrees, 4);
+        Serial.print(GPS.longitudeDegrees, 9);
         Serial.println(GPS.lon);
         Serial.print("Speed (knots): ");
         Serial.println(GPS.speed);
