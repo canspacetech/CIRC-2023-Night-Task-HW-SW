@@ -6,23 +6,25 @@
 #include <WiFi.h>          // WIFI Functionality
 #include <WiFiClient.h>    // WIFI Functionality
 #include <WiFiAP.h>        // WIFI Functionality
+#include <ESPTelnet.h>     // Telnet Functionality
 
 #define GPSSerial Serial2  // On ESP-32, Serial 2 is TX=GPIO17, RX= GPIO16
 #define LED_BUILTIN 2      // Onboard LED
 #define GPSTOSERIAL true   // Enables serial output of GPS to USB terminal every 2 seconds
 
-// Connect to the GPS on the hardware port
-Adafruit_GPS GPS(&GPSSerial);
-
+Adafruit_GPS GPS(&GPSSerial); //GPS
 
 uint32_t timer = millis(); // General Purpose timer
-
+uint32_t timer_telnet = millis(); // General Purpose timer for telnet client
 const char *ssid = "Reactor";  // SSID Name
 IPAddress local_IP(10, 10, 10, 1);
 IPAddress gateway(10, 10, 10, 1);
 IPAddress subnet(255, 255, 255, 0);
 
 WiFiServer server(80);     // Webserver
+
+ESPTelnet telnet; // Telnet Server
+uint16_t  port = 23;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -53,11 +55,15 @@ void setup() {
 
   Serial.println("Start Webserver ");
   server.begin();
+
+  Serial.print("- Telnet: "); Serial.print(local_IP); Serial.print(" "); Serial.println(port);
+  setupTelnet();
 }
 
 void loop() {                              // run over and over again
   WiFiClient client = server.available();  // listen for incoming clients
-
+  telnet.loop();
+  // On Webpage access
   if (client) {                     // if you get a client,
     Serial.println("New Client.");  // print a message out the serial port
     String currentLine = "";        // make a String to hold incoming data from the client
@@ -160,7 +166,6 @@ void loop() {                              // run over and over again
   }
 
   // approximately every 2 seconds or so, print out the current stats to Serial2
-
   if (GPSTOSERIAL) {
     if (millis() - timer > 2000) {
       timer = millis();  // reset the timer
@@ -204,4 +209,111 @@ void loop() {                              // run over and over again
       }
     }
   }
+
+  
+  // If telnet client connected
+  if (telnet.isConnected() && millis() - timer_telnet > 2000){
+    if (millis() - timer_telnet > 2000) {
+      timer_telnet = millis();  // reset the timer
+      telnet.println("****************************************");
+      telnet.print("Time: ");
+      if (GPS.hour < 10) { telnet.print('0'); }
+      telnet.print(GPS.hour, DEC);
+      telnet.print(':');
+      if (GPS.minute < 10) { telnet.print('0'); }
+      telnet.print(GPS.minute, DEC);
+      telnet.print(':');
+      if (GPS.seconds < 10) { telnet.print('0'); }
+      telnet.print(GPS.seconds, DEC);
+      telnet.print('.');
+      if (GPS.milliseconds < 10) {
+        telnet.print("00");
+      } else if (GPS.milliseconds > 9 && GPS.milliseconds < 100) {
+        telnet.print("0");
+      }
+      telnet.println(GPS.milliseconds);
+      telnet.print("Date: ");
+      telnet.print(GPS.day, DEC);
+      telnet.print('/');
+      telnet.print(GPS.month, DEC);
+      telnet.print("/20");
+      telnet.println(GPS.year, DEC);
+      if (GPS.fix) {
+        telnet.print("Location: ");
+        telnet.print(GPS.latitudeDegrees, 9);
+        telnet.print(GPS.lat);
+        telnet.print(", ");
+        telnet.print(GPS.longitudeDegrees, 9);
+        telnet.println(GPS.lon);
+        telnet.print("Speed (knots): ");
+        telnet.println(GPS.speed);
+        telnet.print("Angle: ");
+        telnet.println(GPS.angle);
+        telnet.print("Altitude: ");
+        telnet.println(GPS.altitude);
+        telnet.print("Satellites: ");
+        telnet.println((int)GPS.satellites);
+      }
+    }
+  }
+}
+
+void errorMsg(String error, bool restart = true) {
+  Serial.println(error);
+  if (restart) {
+    Serial.println("Rebooting now...");
+    delay(2000);
+    ESP.restart();
+    delay(2000);
+  }
+}
+
+void setupTelnet() {  
+  // passing on functions for various telnet events
+  telnet.onConnect(onTelnetConnect);
+  telnet.onConnectionAttempt(onTelnetConnectionAttempt);
+  telnet.onReconnect(onTelnetReconnect);
+  telnet.onDisconnect(onTelnetDisconnect);
+  
+  // passing a lambda function
+  telnet.onInputReceived([](String str) {
+    Serial.print(str);
+  });
+
+  telnet.setLineMode(false);
+  Serial.print("- Telnet Line Mode: "); Serial.println(telnet.isLineModeSet() ? "YES" : "NO");
+  
+  Serial.print("- Telnet: ");
+  if (telnet.begin(port)) {
+    Serial.println("running");
+  } else {
+    Serial.println("error.");
+    errorMsg("Will reboot...");
+  }
+}
+
+void onTelnetConnect(String ip) {
+  Serial.print("- Telnet: ");
+  Serial.print(ip);
+  Serial.println(" connected");
+  telnet.println("\nWelcome " + telnet.getIP());
+  telnet.println("(Use ^] + q  to disconnect.)");
+}
+
+void onTelnetDisconnect(String ip) {
+  Serial.print("- Telnet: ");
+  Serial.print(ip);
+  Serial.println(" disconnected");
+}
+
+void onTelnetReconnect(String ip) {
+  Serial.print("- Telnet: ");
+  Serial.print(ip);
+  Serial.println(" reconnected");
+}
+
+void onTelnetConnectionAttempt(String ip) {
+  Serial.print("- Telnet: ");
+  Serial.print(ip);
+  Serial.println(" tried to connected");
 }
