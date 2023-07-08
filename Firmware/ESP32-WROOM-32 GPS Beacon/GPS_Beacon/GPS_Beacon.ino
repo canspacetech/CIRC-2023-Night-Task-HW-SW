@@ -2,6 +2,15 @@
 // Used for providing real-time gps location of objects, such as the reactor and astronaut
 // Torban Peterson torban@torban.ca
 
+// Hardware
+// ESP-32 Dev kit https://universal-solder.ca/product/esp32-devkit-esp-wroom-32-4mb-cp2101-usb-iot-arduino/
+// GPS Module https://www.amazon.ca/GY-GPS6MV2-NEO6MV2-Antenna-Arduino-Control/dp/B0822TJV15/ref=sr_1_2?keywords=ublox+gps+module&sr=8-2
+// most gps modules compatible with the adafruit gps library will likely work. the ublox 6M is a super cheap old one, not fancy, i think from china they were a few dollars. if i have a better one ill switch.
+// I may end up using the esp32-s3 newer variant with better antenna. code should remain the same
+// Im hoping to host this device on the web, likely at http://reactor.torban.ca in the next week or so so you may connect and play with it if you wish. 
+//    this web variant will have slightly different code as it cannot be in AP mode
+
+
 #include <Adafruit_GPS.h>  // GPS Functionality
 #include <WiFi.h>          // WIFI Functionality
 #include <WiFiClient.h>    // WIFI Functionality
@@ -23,7 +32,7 @@ IPAddress subnet(255, 255, 255, 0);
 
 WiFiServer server(80);     // Webserver
 
-ESPTelnet telnet; // Telnet Server
+ESPTelnet telnet;          // Telnet Server
 uint16_t  port = 23;
 
 void setup() {
@@ -31,7 +40,7 @@ void setup() {
 
   Serial.begin(115200);
   Serial.println("CIRC 2023 GPS Beacon");
-  Serial.println("Version 0");
+  Serial.println("Version 1 - 2023-07-08");
   Serial.println("https://github.com/canspacetech/CIRC-2023-Night-Task-HW-SW.git");
 
   Serial.println("Startup GPS Module");
