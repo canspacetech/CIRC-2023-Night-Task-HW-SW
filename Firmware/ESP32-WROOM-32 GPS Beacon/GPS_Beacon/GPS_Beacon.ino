@@ -36,11 +36,12 @@ ESPTelnet telnet;          // Telnet Server
 uint16_t  port = 23;
 
 void setup() {
+  setCpuFrequencyMhz(80); // Underclock to save power
   pinMode(LED_BUILTIN, OUTPUT);
 
   Serial.begin(115200);
   Serial.println("CIRC 2023 GPS Beacon");
-  Serial.println("Version 1 - 2023-07-08");
+  Serial.println("Version 1.1 - 2023-07-09");
   Serial.println("https://github.com/canspacetech/CIRC-2023-Night-Task-HW-SW.git");
 
   Serial.println("Startup GPS Module");
@@ -134,6 +135,8 @@ void loop() {                              // run over and over again
               client.print("<br>Satellites: ");
               client.println((int)GPS.satellites);
             }
+            //client.print("<br>WiFi RSSI: ");
+            //client.println(WiFi.RSSI());
 
 
             // the content of the HTTP response follows the header:
@@ -216,6 +219,8 @@ void loop() {                              // run over and over again
         Serial.print("Satellites: ");
         Serial.println((int)GPS.satellites);
       }
+      //Serial.print("WiFi RSSI: ");
+      //Serial.println(WiFi.RSSI());
     }
   }
 
@@ -263,6 +268,8 @@ void loop() {                              // run over and over again
         telnet.print("Satellites: ");
         telnet.println((int)GPS.satellites);
       }
+      //telnet.print("WiFi RSSI: ");
+      //telnet.println(WiFi.RSSI());
     }
   }
 }
