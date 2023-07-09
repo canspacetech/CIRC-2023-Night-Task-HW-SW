@@ -13,8 +13,12 @@ This is a variety of hardware to support the CIRC 2023 Night Task
 ## Getting Started
 
 To use the Reactor GPS Beacon, connect to the open SSID Reactor
-Reactor IP will be accessible at http://10.10.10.1 Port 80
-Reactor also accessible by Telnet at 10.10.10.1 Port 23
+* Reactor IP will be accessible at http://10.10.10.1 Port 80
+* Reactor also accessible by Telnet at 10.10.10.1 Port 23
+
+To use the Astronaut GPS Beacon, connect to the open SSID Isaac_Asimov
+* Astronaut IP will be accessible at http://10.10.11.1 Port 80
+* Astronaut also accessible by Telnet at 10.10.11.1 Port 23
 
 ## Authors
 
