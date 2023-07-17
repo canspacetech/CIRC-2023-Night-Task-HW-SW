@@ -22,7 +22,7 @@ To use the Reactor GPS Beacon, connect to the open SSID "Reactor"
 		* Separate webpage to test/start reactor
 		* This page will be updated if so, as well as simulation folder
 * CAD files provided
-	* Reactor Module - May be used to confirm handling and gripping requirements
+	* Reactor Module (URM) - May be used to confirm handling and gripping requirements
 	* Reactor - May be used to test and confirm clearance
 		* There is a minimum of 30mm between the reactor and module and housing wall for arm clearance
 	* Control Panel - Can be used to test ability to manually press buttons if required
