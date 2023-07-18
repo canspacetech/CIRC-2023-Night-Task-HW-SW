@@ -2,90 +2,58 @@
 Welcome 10.10.10.2
 (Use ^] + q  to disconnect.)
 ****************************************
-Time: 20:54:03.000
-Date: 8/7/2023
-Location: 49.653499603N, -109.522216797W
-Speed (knots): 0.88
-Angle: 354.76
-Altitude: 1275.70
-Satellites: 7
-****************************************
-Time: 20:54:05.000
-Date: 8/7/2023
-Location: 49.653537750N, -109.522186279W
-Speed (knots): 2.42
-Angle: 354.76
-Altitude: 1275.90
-Satellites: 7
-****************************************
-Time: 20:54:07.000
-Date: 8/7/2023
-Location: 49.653556824N, -109.522178650W
-Speed (knots): 2.43
-Angle: 354.76
-Altitude: 1276.00
-Satellites: 7
-****************************************
-Time: 20:54:09.000
-Date: 8/7/2023
-Location: 49.653564453N, -109.522178650W
-Speed (knots): 2.27
-Angle: 354.76
-Altitude: 1276.00
-Satellites: 7
-****************************************
-Time: 20:54:11.000
-Date: 8/7/2023
-Location: 49.653537750N, -109.522163391W
-Speed (knots): 1.10
-Angle: 354.76
-Altitude: 1276.00
+Time: 19:05:03.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.03
+Angle: 72.73
+Altitude: 774.90
 Satellites: 6
 ****************************************
-Time: 20:54:13.000
-Date: 8/7/2023
-Location: 49.653537750N, -109.522163391W
-Speed (knots): 0.83
-Angle: 354.76
-Altitude: 1276.10
+Time: 19:05:05.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.02
+Angle: 72.73
+Altitude: 775.30
 Satellites: 6
 ****************************************
-Time: 20:54:15.000
-Date: 8/7/2023
-Location: 49.653495789N, -109.522163391W
-Speed (knots): 0.82
-Angle: 354.76
-Altitude: 1276.20
-Satellites: 7
-****************************************
-Time: 20:54:17.000
-Date: 8/7/2023
-Location: 49.653469086N, -109.522178650W
-Speed (knots): 1.00
-Angle: 354.76
-Altitude: 1276.50
-Satellites: 7
-****************************************
-Time: 20:54:19.000
-Date: 8/7/2023
-Location: 49.653423309N, -109.522163391W
-Speed (knots): 1.51
-Angle: 354.76
-Altitude: 1276.60
+Time: 19:05:07.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.03
+Angle: 72.73
+Altitude: 775.70
 Satellites: 6
 ****************************************
-Time: 20:54:21.000
-Date: 8/7/2023
-Location: 49.653369904N, -109.522163391W
-Speed (knots): 2.23
-Angle: 354.76
-Altitude: 1276.80
-Satellites: 7
+Time: 19:05:09.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.04
+Angle: 72.73
+Altitude: 776.20
+Satellites: 6
 ****************************************
-Time: 20:54:23.000
-Date: 8/7/2023
-Location: 49.653362274N, -109.522186279W
-Speed (knots): 2.18
-Angle: 354.76
-Altitude: 1277.00
+Time: 19:05:11.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.08
+Angle: 72.73
+Altitude: 776.70
+Satellites: 6
+****************************************
+Time: 19:05:13.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.08
+Angle: 72.73
+Altitude: 776.90
+Satellites: 6
+****************************************
+Time: 19:05:15.000
+Date: 18/7/2023
+Location: 49.988986969N, -109.121833801W
+Speed (knots): 0.05
+Angle: 72.73
+Altitude: 777.00
 Satellites: 7
